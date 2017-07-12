@@ -8,11 +8,11 @@
         intervals.sort((a, b) -> Integer.compare(a.start, b.start));
         Arrays.sort(intervals, (a, b) -> Integer.compare(a.start, b.start));
 
-####  2) How to sort a collection (ArrayList)
+####  3) How to sort a collection (ArrayList)
         Collections.sort(list);
         Collections.reverse(list);
 
-####  3) Initialize an array
+####  4) Initialize an array
         int[] array = { 1, 2, 3, 4, 5 };
         int[] array = new int[] {1, 2, 3, 4, 5};
         int[] array = new int[];

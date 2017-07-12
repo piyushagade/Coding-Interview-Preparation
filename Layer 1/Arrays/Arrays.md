@@ -18,7 +18,7 @@ Arrays
         
 
 ---
-### Two sum in unsorted array
+### Two sum in an unsorted array
 
 #### Find two numbers in an array which add up to 'sum'.
 1) For every number we now 'search' for its complement in the array. 
@@ -32,12 +32,10 @@ public int[] twoSum(int[] numbers, int sum) {
 
     HashMap<Integer, Integer> map = new HashMap<>();
 
-    for (int i = 0; i < numbers.length; i++) {
+    for (int i = 0; i < numbers.length; i++)
         map.put(numbers[i], i);
-    }
 
-    
-    
+
     for (int i = 0; i < nums.length; i++) {
         int complement = sum - numbers[i];
 
@@ -49,7 +47,11 @@ public int[] twoSum(int[] numbers, int sum) {
 }
 ```
 
+---
 ### Two sum in a sorted array (Class B binary search problem)
+1) Unlike in an unsorted array, we don't require a HashTable to expedite the searching of 'complement' in the array.
+2) Instead, since, the array is sorted, we use Binary search.
+
 ```java
 public int[] twoSumSortedArray(int[] numbers, int sum) {
     if (numbers.length <= 1)
@@ -77,14 +79,17 @@ public int[] twoSumSortedArray(int[] numbers, int sum) {
 }
 ```
 
-### Three sum -> O(n^2)
+---
+### Three sum 
+#### Time complexity: O(n^2)
 
 ```java
 public List<List<Integer>> threeSum(int[] nums, int sum) {
-    Arrays.sort(nums);
     Lis<List<Integer>> list = new ArrayList<>();
 
-    for (int i = 0; i < nums.length - 2; i++) {         //! Why are the last two numbers skipped?
+    Arrays.sort(nums);                                              // O(n log n)
+
+    for (int i = 0; i < nums.length - 2; i++) {                     //! Why are the last two numbers skipped?
         if (i == 0 || (i > 0 && nums[i] != nums[i - 1])) {
             int diff = 0 - nums[i];
 
@@ -117,10 +122,12 @@ public List<List<Integer>> threeSum(int[] nums, int sum) {
 ```
 
 
+---
 ### Majority element (Moore-Boyer voting algorithm)
+#### Time complexity: O(n)
 
 ```java
-public int majorityElemeent(int[] nums) {
+public int majorityElement(int[] nums) {
     int me_ix = 0;
     int count = 0;
 
@@ -137,7 +144,9 @@ public int majorityElemeent(int[] nums) {
 
 ```
 
+---
 ### Move zeroes in an array
+#### Time complexity: O(n)
 
 ```java
 public void moveZeroes(int[] nums) {
@@ -155,7 +164,9 @@ public void moveZeroes(int[] nums) {
 
 ```
 
+---
 ### Remove duplicates in a sorted array
+#### Time complexity: O(n)
 
 #### Not similar to
 1) Find all duplicates in an array
@@ -175,8 +186,11 @@ public int removeDuplicates(int[] nums) {
 
 ```
 
+---
 ### Remove duplicates from sorted arrays with at most two duplicates allowed
-//* Use example {7, 7, 7, 8, 9}
+#### Time complexity: O(n)
+
+#### Use example {7, 7, 7, 8, 9}
 
 ```java
 public int removeDuplicates(int[] nums){
@@ -191,7 +205,9 @@ public int removeDuplicates(int[] nums){
 
 ```
 
+---
 ### Remove all occurrences of a particular value
+#### Time complexity: O(n)
 
 ```java
 public int removeElementsArray(int[] nums, int target){
@@ -206,7 +222,9 @@ public int removeElementsArray(int[] nums, int target){
 
 ```
 
+---
 ### Add 1 to an array (First index is MSB)
+#### Time complexity: O(n)
 
 ```java
 public int[] plusOne(int[] nums) {
@@ -235,7 +253,9 @@ public int[] plusOne(int[] nums) {
 
 ```
 
+---
 ### Product of array except self
+#### Time complexity: O(n)
 
 ```java
 public int[] productExceptSelf(int[] nums) {
@@ -262,7 +282,10 @@ public int[] productExceptSelf(int[] nums) {
 }
 ```
 
+---
 ### Find if an array contains at least one duplicate
+#### Time complexity: O(n)
+#### Space complexity: O(n)
 
 ```java
 public boolean containsDuplicate(int[] nums) {
@@ -277,7 +300,9 @@ public boolean containsDuplicate(int[] nums) {
 
 ```
 
+---
 ### Find if an array contains duplicates with difference in their indices at max k
+#### Time complexity: O(n)
 
 ```java
 public boolean containsDuplicateII(int[] nums){
@@ -299,7 +324,9 @@ public boolean containsDuplicateII(int[] nums){
 
 ```
 
+---
 ### Pascal's triangle
+#### Time complexity: O(n^2)
 
 ```java
 public List<List<Integers>> pascalsTriangle(int n){
@@ -321,7 +348,9 @@ public List<List<Integers>> pascalsTriangle(int n){
 
 ```
 
+---
 ### Merge two sorted arrays into the first array
+#### Time complexity: O(n)
 
 ```java
 public mergeSortedArrays(int[] nums1, int m, int[] nums2, int n){
@@ -334,8 +363,8 @@ public mergeSortedArrays(int[] nums1, int m, int[] nums2, int n){
         nums[k--] = nums[i] < nums[j] ? nums[j--] : nums[i--];
     }
 
-    //* The following loop handles the case if all the elements in nums1 are larger than those in nums2
-    //* Example: nums1 = [7, 8, 9], and nums2 = [1, 2, 3] 
+    // The following loop handles the case if all the elements in nums1 are larger than those in nums2
+    // Example: nums1 = [7, 8, 9], and nums2 = [1, 2, 3] 
     while(j >= 0){
         nums[k--] = nums[j--];
     }
@@ -345,11 +374,9 @@ public mergeSortedArrays(int[] nums1, int m, int[] nums2, int n){
 
 ```
 
-### Sort colors
-// See Two Pointers
-
-
+---
 ### Insert, delete, get random
+#### Time complexity: All actions are O(1)
 
 ```java
 //* Uses a HashMap and an ArrayList
@@ -392,9 +419,12 @@ public class InsertDeleteGetRandom{
 }
 ```
 
+---
 ### Shortest word distance
-// Shortest distance between two elements in an array.s
-// Given a list of words and two words word1 and word2, return the shortest distance between these two words in the list.
+1) Find shortest distance between two elements in an array.
+2) Given a list of words and two words word1 and word2, return the shortest distance between these two words in the list.
+
+#### Time complexity: O(n)
 
 ```java
 public int shortestDistance(int[] words, String word1, String word2){
@@ -416,8 +446,14 @@ public int shortestDistance(int[] words, String word1, String word2){
 
 ```
 
+---
 ### Third largest number in an array. 
-// If third largest doesn't exist, return the largest number.
+1) If third largest doesn't exist, return the largest number.
+
+#### Time complexity: O(n)
+
+#### Not same as, but similar to
+1) Top k frequent elements in an array
 
 ```java
 public int thirdLargest(int[] nums){
@@ -444,14 +480,17 @@ public int thirdLargest(int[] nums){
 
 ```
 
+---
 ### Rotate array, similar to rotate linked list.
-// Rotate Linked list can also be solved using queen and pawn.
+1) Rotate Linked list can also be solved using queen and pawn.
+
+#### Time complexity: O(n) because of reverseArray() function
 
 ```java
 public int[] rotateArray(int[] nums, int k){
     if(nums.length <= 1) return nums;
 
-    k = k % nums.length;    //! Don't forget to do this
+    k = k % nums.length;                        // Required when k is greater or equal to nums.length
 
     reverseArray(nums, 0, nums.length - 1);
     reverseArray(nums, 0, k - 1);
@@ -461,7 +500,9 @@ public int[] rotateArray(int[] nums, int k){
 }
 ```
 
+---
 ### Reverse an array
+#### Time complexity: O(n)
 
 ```java
 public int[] reverseArray(int[] nums, int begin, int end){
@@ -477,7 +518,9 @@ public int[] reverseArray(int[] nums, int begin, int end){
 
 ```
 
+---
 ### Spiral matrix
+#### Time complexity: O(n^2)
 
 ```java
 public List<Integer> spiralMatrix(int[][] matrix){
@@ -489,7 +532,7 @@ public List<Integer> spiralMatrix(int[][] matrix){
     List<Integer> result = new ArrayList<>();
 
     while(rowBegin <= rowEnd && colBegin <= colEnd){
-        for(int i = colBegin; i <= colEnd; i++){     // '<=' because colEnd = matrix.length - 1;
+        for(int i = colBegin; i <= colEnd; i++){                // '<=' because colEnd = matrix.length - 1;
             result.add(matrix[rowBegin][i]);
         }
         rowBegin++;
@@ -516,7 +559,9 @@ public List<Integer> spiralMatrix(int[][] matrix){
 }
 ```
 
+---
 ### Merge intervals
+#### Time complexity: O(n)
 
 ```java
 public List<Interval> mergeInterval(List<Interval> intervals){
@@ -538,18 +583,22 @@ public List<Interval> mergeInterval(List<Interval> intervals){
 
 ```
 
-### Find all duplicates in an array. This technique is applicable only when following condition holds.
-// Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
+---
+### Find all duplicates in an array. 
+#### This technique is applicable only when following condition holds.
+1) Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
+
+#### Time complexity: O(n)
 
 ```java
 public List<Integer> findAllDuplicates(int[] nums){
     List<Integer> result = new ArrayList<>();
 
     for(int i = 0; i < nums.length; i++){
-        int x = Math.abs(nums[i]) - 1;  // -1 because the numbers in the array are from range 1 to n.
+        int x = Math.abs(nums[i]) - 1;              // -1 because the numbers in the array are from range 1 to n.
             
         if(nums[x] < 0){
-            result.add(Math.abs(x + 1));    // From above, we get x + 1 = the number nums[i]
+            result.add(Math.abs(x + 1));            // From above, we get x + 1 = the number nums[i]
         }
 
         nums[x] = -nums[x];
@@ -559,8 +608,11 @@ public List<Integer> findAllDuplicates(int[] nums){
 
 ```
 
+---
 ### Find the numbers which are absent in the array
-// Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
+1) Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
+
+#### Time complexity: O(n)
 
 ```java
 public List<Integer> findDisappearedNumbers(int[] nums){
@@ -578,3 +630,8 @@ public List<Integer> findDisappearedNumbers(int[] nums){
 }
 
 ```
+
+---
+### Sort colors
+See Two Pointers
+

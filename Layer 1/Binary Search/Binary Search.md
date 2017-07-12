@@ -2,40 +2,59 @@
 
 ### Important stuff
 ####  1) Class A Binary Search problems
-        Arrays.sort(a, Collections.reverseOrder());
+These problems are the once where you are supposed to figure out which item to be searched for first and then look for it and return it.<br>
+Examples of this kind of problems:
+a. Find the minimum in a rotated sorted array
+
         
 ####  2) Class B Binary Search problems
-        intervals.sort((a, b) -> Integer.compare(a.start, b.start));
-        Arrays.sort(intervals, (a, b) -> Integer.compare(a.start, b.start));
+In this kind of problems, you already know what you are to be looking for. <br>
+Examples of this kind of problems:
+a. Find a number in an array
+b. Two sum in a sorted array.
+
+####  3) Finding mid
+Doing ```(lo + hi) >>> 1``` is same as doing ```(lo + hi) / 2```. However, the later can cause problems if the numbers at lo and hi are very big, so that their sum exceeds what the programming language allows for an integer.<br>
+So, to avoid this, ```lo + (hi - lo) / 2``` should be used.
+
+#### 4) lo, mid, and hi
+Keep in mind that these are merely indices and not the values themselves.
 
 ---
 
 ### Find minimum in a rotated sorted array (Class A)
+#### Time complexity: O(log n)
+
 #### Use example: {7, 8, 9, 1, 2, 3} and {7, 8, 9, 1, 2, 3, 4, 5, 6}
+
+
 
 ```java
 public int minRotatedSortedArray(int[] nums){
-if(nums.length == 0) throw new IllegalStateException("Invalid input");
+    if(nums.length == 0) throw new IllegalStateException("Invalid input");
 
-int lo = 0;
-int hi = nums.length - 1;
+    int lo = 0;
+    int hi = nums.length - 1;
 
-while(lo < hi){
-    int mid = (lo + hi) >>> 2;
+    while(lo < hi){
+        int mid = (lo + hi) >>> 2;
 
-    // Comparison on hi and mid.
-    // Comparison on lo and mid fails in [2, 1];
-    if(nums[hi] < nums[mid])
-        lo = mid + 1;
-    else
-        hi = mid;
-}
-return nums[lo];    // Could be lo or hi.
+        // Comparison on hi and mid.
+        // Comparison on lo and mid fails in [2, 1];
+        if(nums[hi] < nums[mid])
+            lo = mid + 1;
+        else
+            hi = mid;
+    }
+    return nums[lo];    // Could be lo or hi.
 }
 ```
 
+---
+
 ### Search in rotated sorted array (Class B)
-#### Use example: (7 8 9 1 2 3) and (7 8 9 1 2 3 4)  
+#### Time complexity: O(log n)
+#### Use example: {7, 8, 9, 1, 2, 3} and {7, 8, 9, 1, 2, 3, 4}  
 
 ```java
 public int searchRotatedSortedArray(int[] nums, int target){
@@ -67,7 +86,11 @@ public int searchRotatedSortedArray(int[] nums, int target){
 
 ```
 
+---
+
+
 ### Implement pow(x, n) function
+#### Time complexity: O(log n) ? Not sure.
 
 ```java
 public int pow(int x, int n){
@@ -83,17 +106,21 @@ public int pow(int x, int n){
 }
 ```
 
+---
+
 ### Search in 2D matrix (Class B)
 1) Integers in each row are sorted from left to right.
 2) The first integer of each row is greater than the last integer of the previous row.
 
-/*
+#### Time complexity: O(log n)
+
+```
 [
     [1,   3,  5,  7],
     [10, 11, 16, 20],
     [23, 30, 34, 50]
 ]
-*/
+```
 
 ```java
 public boolean searchIn2DMatrix(int[][] matrix, int target){
@@ -119,11 +146,16 @@ public boolean searchIn2DMatrix(int[][] matrix, int target){
 }
 ```
 
+---
+
 ### Search a 2D matrix II (Class B)
 1) Integers in each row are sorted in ascending from left to right.
 2) Integers in each column are sorted in ascending from top to bottom.
 
-/*
+#### Time complexity: O(n)
+
+
+```
 [
     [1,  4,  7, 11, 15],
     [2,  5,  8, 12, 19],
@@ -131,7 +163,7 @@ public boolean searchIn2DMatrix(int[][] matrix, int target){
     [10, 13, 14, 17, 24],
     [18, 21, 23, 26, 30]
 ]
-*/
+```
 
 ```java
 public boolean searchIn2DMatrixII(int[][] matrix, int target){
@@ -151,10 +183,12 @@ public boolean searchIn2DMatrixII(int[][] matrix, int target){
 
 ```
 
-### Intersection of two arrays
-// See Arrays
+
+---
 
 ### Find peak element
+#### Time complexity: O(n)
+
 #### Use example: {2, 3, 5, 4, 1}. Should return 5.
 
 ```java
@@ -170,10 +204,14 @@ public int findPeakElement(int[] nums){
 
 ```
 
+---
+
 ### Guess the number game (Class B)
 1) I pick a number from 1 to n. You have to guess which number I picked.
 2) Every time you guess wrong, I'll tell you whether the number is higher or lower.
 3) You call a pre-defined API guess(int num) which returns 3 possible results (-1, 1, or 0)
+
+#### Time complexity: O(log n)
 
 ```java
 public int guessGame(int n){
@@ -197,9 +235,13 @@ public int guessGame(int n){
 
 ```
 
+---
+
 ### First bad version (Class A)
 1) Suppose you have n versions [1, 2, ..., n] and you want to find out the first bad one, which causes all the following ones to be bad.
 2) You are given an API bool isBadVersion(version) which will return whether version is bad. Implement a function to find the first bad version.
+
+#### Time complexity: O(log n)
 
 ```java
 public int firstBadVersion(int n){
@@ -219,12 +261,16 @@ public int firstBadVersion(int n){
 
 ```
 
+---
+
 ### Two sum in a sorted array (Class B)
 See Arrays
 
 ### Search insertion position (Class B)
 1) Given a sorted array and a target value, return the index if the target is found. 
 2) If not, return the index where it would be if it were inserted in order.
+
+#### Time complexity: O(log n)
 
 ```java
 public int searchPosition(int nums, int target){
@@ -246,3 +292,10 @@ public int searchPosition(int nums, int target){
 }   
 
 ```
+
+
+<br><br>
+# Repeated Questions
+
+### Intersection of two arrays
+See Arrays

@@ -124,7 +124,7 @@ public class Solution(){
         String prefix = words[0];
         for(int i = 1; i < word.length; i++){
             while(words[i].indexOf(prefix) != 0)
-                prefix = prefix.substring(0, prefix.length() - 1);  //! substring(m, n) give the substring with m inclusive, but n exlusive.
+                prefix = prefix.substring(0, prefix.length() - 1);  //! substring(m, n) give the substring with m inclusive, but n exclusive.
         }
 
         return prefix;
@@ -144,14 +144,16 @@ public class Solution(){
 
             while(result.peek().length() == i){
                 String base = result.remove();
-                for(char c : map[digit])
+                for(char c : map[digit].toCharArray())
                     result.add(base + c);
             }
         }
         return result;
     }
 
-    // MARK: Add binary (Similar to add two LinkedLists)
+    // MARK: Add two numbers represented as strings
+    // First index is MSB. 
+    // (Similar to add two LinkedLists)
     public String addBinary(String a, String b){
         StringBuilder sb = new StringBuilder();
 

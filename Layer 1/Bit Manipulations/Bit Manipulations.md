@@ -2,8 +2,8 @@
 
 ### Important stuff
 ####  1) XOR
-1) a ^ a = 0
-2) a ^ b ^ a = b
+1) a XOR a = 0
+2) a XOR b XOR a = b
 
 ---
 

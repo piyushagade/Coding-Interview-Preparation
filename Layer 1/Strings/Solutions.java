@@ -136,7 +136,7 @@ public class Solution(){
     // MARK: Letter combinations of a phone number
     public List<String> letterCombinations(String digits){
         String[] map = {"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};    //! Arrays are defined using {} braces.
-        List<String> result = new LinkedList<>();         //! Use LinkedList for this problem
+        List<String> result = new LinkedList<>();                                               //! Use LinkedList for this problem
         
         result.add("");
         for(int i = 0; i < digits.length; i++){

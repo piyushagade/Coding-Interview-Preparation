@@ -1,5 +1,6 @@
-Arrays
----
+# Arrays
+
+### Important stuff
 ####  1) Reverse sort an array
         Arrays.sort(a, Collections.reverseOrder());
         
@@ -126,6 +127,9 @@ public List<List<Integer>> threeSum(int[] nums, int sum) {
 ### Majority element (Moore-Boyer voting algorithm)
 #### Time complexity: O(n)
 
+This algorithm is based on the observation that for every non-majority element, there will be a majority element.<br>
+For example, in the array **{7, 7, 7, 8, 9}**, there is a 7 for 8 and 9. So, the count variable will be 3 when the cursor i is 2, however, 8 and 9 will deduct 1 each from the count variable. And at the end of the iteration, the count will be 1, and the majority element will be revealed as 7.
+
 ```java
 public int majorityElement(int[] nums) {
     int me_ix = 0;
@@ -147,6 +151,8 @@ public int majorityElement(int[] nums) {
 ---
 ### Move zeroes in an array
 #### Time complexity: O(n)
+
+ix = *insert index*
 
 ```java
 public void moveZeroes(int[] nums) {
@@ -301,7 +307,7 @@ public boolean containsDuplicate(int[] nums) {
 ```
 
 ---
-### Find if an array contains duplicates with difference in their indices at max k
+### Find if an array contains duplicates with difference in their indices at most k
 #### Time complexity: O(n)
 
 ```java
@@ -316,8 +322,7 @@ public boolean containsDuplicateII(int[] nums){
         if(map.containsKey(nums[i]) && Math.abs(map.get(nums[i]) - i <= k)
             return true;
 
-        //! Update position
-        map.put(nums[i], i);
+        map.put(nums[i], i);                                    // Update the map
     }
     return false;
 }
@@ -327,6 +332,8 @@ public boolean containsDuplicateII(int[] nums){
 ---
 ### Pascal's triangle
 #### Time complexity: O(n^2)
+ 
+<img src="https://i.stack.imgur.com/IYMmu.png" height="120"><br/>
 
 ```java
 public List<List<Integers>> pascalsTriangle(int n){
@@ -351,6 +358,9 @@ public List<List<Integers>> pascalsTriangle(int n){
 ---
 ### Merge two sorted arrays into the first array
 #### Time complexity: O(n)
+
+You are given two arrays, the first array is not full, and it has exactly as many empty spots as there are elements in the second array.
+The task is to integrate second array into the first. The integrated array should be sorted in the end.
 
 ```java
 public mergeSortedArrays(int[] nums1, int m, int[] nums2, int n){
@@ -377,6 +387,9 @@ public mergeSortedArrays(int[] nums1, int m, int[] nums2, int n){
 ---
 ### Insert, delete, get random
 #### Time complexity: All actions are O(1)
+
+Design an abstract data structure that allows inserting, deleting, and getting a random item in O(1) time.<br><br>
+Clearly, to have a random fetch behaviour we need to use an arraylist or an array as the underlying data structure.
 
 ```java
 //* Uses a HashMap and an ArrayList
@@ -421,8 +434,9 @@ public class InsertDeleteGetRandom{
 
 ---
 ### Shortest word distance
-1) Find shortest distance between two elements in an array.
-2) Given a list of words and two words word1 and word2, return the shortest distance between these two words in the list.
+1) Given a list of words and two words word1 and word2, return the shortest distance between these two words in the list.
+
+This solution can be used in any scenario where you are required to find least difference in the indices of two elements in an array/arraylist.
 
 #### Time complexity: O(n)
 
@@ -631,7 +645,9 @@ public List<Integer> findDisappearedNumbers(int[] nums){
 
 ```
 
----
+<br><br>
+# Repeated Questions
+
 ### Sort colors
 See Two Pointers
 

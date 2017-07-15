@@ -38,15 +38,15 @@ public int minimumEditDistance(String word1, String word2){
 
     int[][] dp = new int[n + 1][m + 1];
 
-    // initialize dp
+    // Initialize dp
     for(int i = 0; i < m + 1; i++) 
         dp[0][i] = i;
     for(int i = 0; i < n + 1; i++) 
         dp[i][0] = i;
 
-    for(int i = 1; i < n + 1; i++){                         // mind the limits
+    for(int i = 1; i < n + 1; i++){                             // Mind the limits
         for(int k = 1; k < m + 1; k++){
-            if(word1.charAt(i - 1) == word2.charAt(k - 1))  // mind the  -1
+            if(word1.charAt(i - 1) == word2.charAt(k - 1))      // Mind the  -1
                 dp[i][k] = dp[i - 1][k - 1];
             else{
                 int a = dp[i - 1][k];
@@ -99,7 +99,7 @@ public int maxProfitMultipleTransactions(int[] nums) {
 
 ---
 
-### Subarray with maximum sum (Class B)
+### SubArray with maximum sum (Class B)
 
 ```java
 public int maxSumSubarray(int[] nums){
@@ -117,7 +117,7 @@ public int maxSumSubarray(int[] nums){
 
 ---
 
-### Maximum product subarray
+### Maximum product SubArray
 
 ```java
 public int maxProductSubarray(int[] nums){
@@ -225,5 +225,59 @@ public boolean wordBreak(String s, List<String> dict){
         }
     }
     return breakable[breakable.length - 1];
+}
+```
+
+---
+
+### Longest palindromic substring
+Given a string, find the longest substring that is a palindrome.
+
+```java
+public String longestPalindromicSubstring(String s){
+    boolean[][] truths = new boolean[s.length()][s.length()];
+
+    int longest = 0;
+    String palindrome = "";
+
+    // Substrings of length 1
+    for(int i = 0; i < s.length(); i++){
+        truths[i][i] = true;
+
+        if(s.substring(i, i + 1).length() >= longest){
+            longest = s.substring(i, i + 1).length();
+            palindrome = s.substring(i, i + 1);
+        }
+    }
+
+    // Substrings of length 2
+    for(int i = 0; i < s.length() - 1; i++){
+        if(s.charAt(i) == s.charAt(i + 1)){
+            truths[i][i + 1] = true;
+
+            if(s.substring(i, i + 2).length() > longest){
+                longest = s.substring(i, i + 2).length();
+                palindrome = s.substring(i, i + 2);
+            }
+        }
+    }
+
+    // Substrings of length 3 or greater
+    for(int k = 3; k <= s.length(); k++){
+        for(int i = 0; i < s.length() - k + 1; i++){
+            int j = i + k - 1;
+
+            if(s.charAt(i) == s.charAt(j) && truths[i + 1][j - 1]){
+                truths[i][j] = true;
+
+                if(s.substring(i, j + 1).length() > longest){
+                    longest = s.substring(i, j + 1).length();
+                    palindrome = s.substring(i, j + 1);
+                }
+            }
+        }
+    }
+
+    return palindrome;
 }
 ```

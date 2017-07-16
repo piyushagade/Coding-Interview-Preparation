@@ -53,18 +53,6 @@ public class Solution(){
     }
 
     // MARK: Integer to roman (Similar to integer to english)
-    public integerToEnglish(int number){
-        String space = " ";
-        String[] thousands = {"", "one thousand", "two thousand", "three thousand", "four thousand"};   //! Arrays are defined with {}
-        String[] hundreds = {"" , "one hundred, Two hundred, Three hundred", "Four hundred", "Five hundred", "Six hundred", "Seven hundred", "Eight hundred","Nine hundred"};
-        String[] tens = {"", "ten", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety"};
-        String[] teens = {"", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
-        String[] ones = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
-
-        // Todo: Incorporate teens
-        return thousands[number / 1000] + space + hundreds[(number / 100) % 10] + space + tens[number / 10) % 10] + space + ones[number % 10]; 
-    }
-
     public integerToRoman(int number){
         String M[] = {"", "M", "MM", "MMM"};
         String C[] = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
@@ -72,6 +60,39 @@ public class Solution(){
         String I[] = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
 
         return M[number / 1000] + C[(number % 1000) / 100] + X[(number % 100) /10] + I[number % 10];
+    }
+
+    // MARK:  Integer to English
+    public String integerToEnglishWods(int num){
+        String[] less_than_20 = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
+         "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+
+        String[] tens = {"", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+
+        String[] thousands = {"", "Thousand", "Million", "Billion"};
+
+        if(num == 0) return "Zero";
+
+        int i = 0;
+        String result = "";
+
+        while(num > 0){
+            if(num % 1000 != 0){
+                words = helper(num % 1000) + thousands[i] + " " + words;
+            }
+            i++;
+            num /= 1000;
+        }
+
+        return words.trim();
+    }
+
+    public String helper(int num){
+        if(num == 0) return "";
+        
+        else if(num < 20) return less_than_20[num] + " ";
+        else if(num < 100) return tens[num / 10] + " " + helper(num % 10);
+        else return less_than_20[num / 100] + " " + "Hundred" + " " + helper(num % 100);
     }
 
     // MARK: Reverse words in a string
@@ -129,7 +150,7 @@ public class Solution(){
 
         return prefix;
     }
-
+ 
     // MARK: Group anagrams, or, Friendly words
     //* See: HashMaps
 

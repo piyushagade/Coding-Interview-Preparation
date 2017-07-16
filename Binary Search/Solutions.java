@@ -1,6 +1,7 @@
 public class Solution{
 
-    // MARK: Find minimum in a rotated sorted array (Class A binary search solution)
+    // MARK: Find minimum in a rotated sorted array 
+    // (Class A binary search solution)
     //* Use example: (7 8 9 1 2 3) and (7 8 9 1 2 3 4 5 6)
     public int minRotatedSortedArray(int[] nums){
         if(nums.length == 0) throw new IllegalStateException("Invalid input");
@@ -21,7 +22,8 @@ public class Solution{
         return nums[lo];    //* Could be lo, hi or mid, but mid is not available outside the scope of the while loop.
     }
 
-    // MARK: Search in rotated sorted array (Class B binary search solution)
+    // MARK: Search in rotated sorted array 
+    // (Class B binary search solution)
     //* Use example: (7 8 9 1 2 3) and (7 8 9 1 2 3 4)  
     public int searchRotatedSortedArray(int[] nums, int target){
         int lo = 0;
@@ -51,18 +53,8 @@ public class Solution{
     }
 
     // MARK: Implement pow(x, n) function
-    public int pow(int x, int n){
-        if(x == 0) return 0;
-        if(n == 1) return x;
-        if(n == 0) return 1;
-
-        if(n < 0){
-            n = -n;
-            x = 1 / x;
-        }
-        return x % 2 == 0 ? pow(x * x, n / 2) : pow(x * x, n / 2) * x;
-    }
-
+    // See Math
+    // Time complexity: O(n)
     // MARK: Search in 2D matrix
     // Integers in each row are sorted from left to right.
     // The first integer of each row is greater than the last integer of the previous row.

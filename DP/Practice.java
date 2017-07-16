@@ -138,4 +138,53 @@ public class Practice{
             }
         return breakable[breakable.length - 1];
     }
+
+    // MARK: Longest palindromic substring
+    public String longestPalindromicSubstring(String s){
+        if(s.length() <= 1) return s;
+        
+        boolean[][] truths = new boolean[s.length()][s.length()];
+
+        int longest = 0;
+        String palindrome = "";
+
+        // Substrings of length 1
+        for(int i = 0; i < truths.length; i++){
+            truths[i][i] = true;
+
+            if(s.substring(i, i + 1).length() > longest){
+                longest = s.substring(i, i +1).length();
+                palindrome = s.substring(i, i + 1);
+            }
+        }
+
+        // Substring of length 2
+        for(int i = 0; i < truths.length - 1; i++){
+            if(s.charAt(i) == s.charAt(i + 1))){
+                truth[i][i + 1] = true;
+
+                if(s.substring(i, i + 2).length() > longest){
+                    longest = s.substring(i, i + 2).length();
+                    palindrome = s.substring(i, i + 2);
+                }
+            }
+        }
+
+        // Substrings of length 3 and more
+        for(int length = 3; length <= n; length++){
+            for(int i = 0; i < s.length() - length + 1; i++){
+                int j = i + length - 1;
+
+                if(s.charAt(i) == s.charAt(j) && truths[i + 1][j - 1]){
+                    truth[i][j] = true;
+
+                    if(s.substring(i, j + 1).length() > longest){
+                        longest = s.substring(i, j + 1).length();
+                        palindrome = s.substring(i, j + 1);
+                    }
+                }
+            }
+        }
+        return palindrome; 
+    }
 }

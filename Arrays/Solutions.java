@@ -161,7 +161,9 @@ public class Solution {
         }
         return ix;
     }
-    }
+
+    // MARK: Find the duplicate in an array
+    // See Two Pointers
 
     // MARK: Remove all occurrences of a particular value
     public int removeElementsArray(int[] nums, int target){
@@ -496,6 +498,74 @@ public class Solution {
             if(nums[i] <= n)
                 res.add(i + 1);
 
+        return result;
+    }
+
+    // MARK: Rotate Image
+    public void rotateImage(int[][] matrix){
+        int rows = matrix.length;
+
+        for(int i = 0; i < rows / 2; i++){
+            for(int j = 0; j < (rows + 1) / 2; j++){
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[rows - 1 - j][i];
+                matrix[rows - 1 - j][i] = matrix[rows - 1 - i][rows - 1 - j];
+                matrix[rows - 1 - i][rows - 1 - j] = matrix[j][rows - 1 - i];
+                matrix[j][rows - 1 - i] = temp;
+            }
+        }
+    }
+
+    // MARK: Number of islands
+    public int numberIslands(int[][] matrix){
+        int count = 0;
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0; j < matrix[0].length; j++){
+                count++;
+                clear(matrix, i, j);
+            }
+        }
+    }
+
+    public void clear(int[][] matrix, int i, int j){
+        if(i < 0 || i > matrix.length - 1 || j < 0 || j > matrix[0].length - 1 || matrix[i][j] == 0) return;
+
+        matrix[i][j] = 0;
+        clear(matrix, i - 1, j);
+        clear(matrix, i + 1, j);
+        clear(matrix, i, j - 1);
+        clear(matrix, i, j + 1);
+    }
+
+    // MARK: Merge sort an array
+    public void mergeSort(int[] nums, int lo, int hi){
+        if(lo < hi){
+            int mid = lo + (hi - lo) / 2;
+
+            mergeSort(nums, lo, mid);
+            mergeSort(nums, mid + 1, hi);
+            nums = merge(nums, lo, mid, hi);
+        }
+        return nums;
+    }
+
+    public void merge(int[] nums, int lo, int mid, int hi){
+        int[] result = new int[hi - lo + 1];
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        while(i <= mid && mid + j > nums.length){
+            if(i == 0){
+                result[k++] = nums[mid + 1 + j++];
+                continue;
+            }
+            else if(j == 0){
+                result[k++] = nums[i++];
+                continue;
+            }
+            result[k++] = nums[i] < nums[mid + 1 + j] ? nums[i++] : nums[mid + 1 + j++];
+        }
         return result;
     }
 }

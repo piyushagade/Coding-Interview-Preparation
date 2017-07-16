@@ -184,4 +184,19 @@ public class Practice{
         }
         return result;
     }
+
+    // MARK: Rotate Image
+    public void rotateImage(int[][] matrix){
+        int rows = matrix.length;
+
+        for(int i = 0; i < rows / 2; i++)
+            for(int j = 0; j < (rows + 1) / 2; j++){
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[rows - 1 - j][i];
+                matrix[rows - 1- j][i] = matrix[rows - 1 - i][rows - 1 - j];
+                matrix[rows - 1 - i][rows - 1 - j] = matrix[j][rows - 1 - i];
+                matrix[j][rows - 1 - i] = temp;
+            }
+    }
+    
 }

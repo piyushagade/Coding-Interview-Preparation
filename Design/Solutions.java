@@ -65,22 +65,43 @@ public class Solutions{
     public boolean pythagoreanTriplet(int[] nums){
         for(int i = 0; i < nums.length; i++)
         nuns[i] = nums[i] * nums[i];
-    }
+    
+        Arrays.sort(nums);
 
-    Arrays.sort(nums);
-
-    for(int i = nums.length - 1; i <= 0; i--){
-        //look for pair that adds up to nums[i]
-        int left = 0;
-        int right = i - 1;
-        while(left < right){
-            if(nums[left] + nums[right] = nums[i])
-                return true;
-            if(nums[left] + nums[right] < nums[i])
-                left++;
-            else
-                right--;
+        for(int i = nums.length - 1; i <= 0; i--){
+            //look for pair that adds up to nums[i]
+            int left = 0;
+            int right = i - 1;
+            while(left < right){
+                if(nums[left] + nums[right] = nums[i])
+                    return true;
+                if(nums[left] + nums[right] < nums[i])
+                    left++;
+                else
+                    right--;
+            }
         }
+        return false;
     }
-    return false;
+
+    // MARK: Min stack
+    Stack<Integer> stack = new Stack<>();
+    int min = Integer.MAX_VALUE;
+
+    public void push(int data){
+        if(data <= min){
+            stack.push(min);
+        }
+        stack.push(data);
+    }
+
+    public int pop(){
+        int data = stack.pop();
+        if(data == min) min = stack.pop();
+        return data;
+    }
+
+    public int min(){
+        return min;
+    }
 }

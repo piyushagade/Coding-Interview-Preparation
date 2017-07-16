@@ -1,64 +1,26 @@
-public class Solution{
-    
+public class Practice{
+
     // MARK: Binary tree in-order traversal
     public List<Integer> inOrder(Node root){
-        List<Integer> list = new ArrayList<>();
-        Stack<Node> s = new Stack<>();
+        List<Integer> result = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+
         Node cur = root;
 
-        while(cur != null || !s.isEmpty()){
+        while(cur != null || !stack.isEmpty()){
             while(cur != null){
-                s.push(cur);
+                stack.push(cur);
                 cur = cur.left;
             }
 
-            cur = s.pop();
-            list.add(cur.val);
+            cur = stack.pop();
+            result.add(cur.value);
             cur = cur.right;
         }
-        return list;
+        return result;
     }
 
-    // MARK: kth smallest in a BST
-    public class KthSmallestInABST{
-        int result = Integer.MIN_VALUE;
-        int rank = 0;
-
-        public int kthSmallest(Node root, int k){
-            inorder(root, k);
-            return result;
-        }
-
-        private void inorder(Node root, int k){
-            if(root == null) return;
-
-            inorder(root.left, k);
-            if(++rank == k) result = root.val;
-            inorder(root.right, k);
-        }
-    }
-
-    // MARK: Closet BST value
-    public int closestValue(Node root, int target){
-        int a = root.val;
-        Node child = null;
-
-        if(a < target) 
-            child = root.left;
-        else 
-            child = root.right;
-
-        if(child == null) 
-            return a;
-
-        int b = closestValue(child, target);
-
-        return Math.abs(a - target) < Math.abs(b - target) ? a : b; 
-    }
-
-    
-
-    // MARK: Binary tree level order / zig-zag level order traversal
+    // Binary tree level order / zig-zag level order traversal
     public List<List<Integer>> levelOrder(Node head){
         List<List<Integer>> result = new LinkedList<>();
         Queue<Node> q = new LinkedList<>();
@@ -84,7 +46,7 @@ public class Solution{
         return result;
     }
 
-    // MARK: Validate BST
+    //Validate BST
     public boolean isValid(Node root){
         return isValid(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
@@ -96,7 +58,7 @@ public class Solution{
         return isValid(root.left, min, root.val) && isValid(root.right, root.val, max);
     }
 
-    // MARK: Symmetric tree
+    //Symmetric tree
     public boolean isSymmetric(Node root){
         if(root == null) return true;
 
@@ -110,7 +72,7 @@ public class Solution{
         return (left.val == right.val) && isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);
     }
 
-    // MARK: Maximum depth of binary tree
+    //Maximum depth of binary tree
     public int maxDepth(Node root){
         if(root == null) return 0;
 
@@ -120,7 +82,7 @@ public class Solution{
         return 1 + Math.max(left, right);
     }
 
-    // MARK: Balanced binary tree (needs depth function)
+    //Balanced binary tree (needs depth function)
     public boolean isBalanced(Node root){
         if(root == null) return true;
         return (depth(root.left) - depth(root.right) <= 1) && isBalanced(root.left) && isBalanced(root.right);
@@ -131,7 +93,7 @@ public class Solution{
         return 1 + Math.max(depth(root.left), depth(root.right));
     }
 
-    // MARK: Convert sorted array to BST (needs overloading)
+    //Convert sorted array to BST (needs overloading)
     public Node toBST(int[] nums){
         return toBST(nums, 0, nums.length - 1);
     }
@@ -148,57 +110,17 @@ public class Solution{
         return node;
     }
 
-    // MARK: Populating next right pointers in each node
+    //Populating next right pointers in each node
     public void populateRight(Node root){
         if(root == null) return root;
 
         if(root.left != null){
             root.left.next = root.right;
-            if(root.right != null && root.next != null)
+            if(root.right != null && root.next != null) 
                 root.right.next = root.next.left;
         }
 
         populateRight(root.left);
         populateRight(root.right);
-    }
-
-    // MARK: Binary tree to Doubly Linked List
-    public Node BTToDLL(Node root){
-        return inorder(root);
-    }
-
-    public Node inorder(Node root){
-        if(root == null) return root;
-
-        Node prev = inorder(root.left);
-        Node head = root;
-        Node next = inorder(root.right);
-
-        head.left = prev;
-        head.right = next;
-
-        return head;
-    }
-
-    // MARK: Lowest common ancestor in Binary tree
-    public Node lcaBT(Node root, Node p, Node q){
-        if(root == null || root == p || root == q) return root;
-
-        Node left = lcaBT(root.left, p, q);
-        Node right = lcaBT(root.right, p, q);
-
-       if(left == null) return right;
-       if(right == null) return left;
-       
-       return root;
-    }
-
-    // MARK: Lowest common ancestor in Binary search tree
-    public Node lcaBST(Node root, Node p, Node q){
-        if(root == null) return null;
-
-        if(p.val < root.val && root.val < q.val) return root;
-        else if(root.val < p.val) return lcaBST(root.right, p, q);
-        else if(q.val < root.val) return lcaBST(root.left, p, q);
     }
 }
